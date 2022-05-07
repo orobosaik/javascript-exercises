@@ -1,26 +1,23 @@
 const findTheOldest = function (list) {
-    let position;
-    let age = 0;
-    let previousAge = 0;
+	let position;
+	let previousAge = 0;
 
-    for (let i = 0; i < list.length; i++) {
+	list.forEach((person) => {
+		const birth = person.yearOfBirth;
+		const death = person.yearOfDeath;
 
-        const birth = list[i].yearOfBirth;
-        const death = list[i].yearOfDeath;
+		if (!death) {
+			age = new Date().getFullYear() - birth;
+		} else {
+			age = death - birth;
+		}
 
-        if (!death) {
-            age = new Date().getFullYear() - birth;
-        } else {
-            age = death - birth;
-        }
-
-        if (age > previousAge) {
-            previousAge = age;
-            position = i
-        } else { continue }
-    }
-    return list[position];
-
+		if (age > previousAge) {
+			previousAge = age;
+			position = person;
+		}
+	});
+    return position;
 };
 
 // Do not edit below this line
